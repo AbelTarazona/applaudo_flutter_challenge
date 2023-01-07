@@ -12,6 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Applaudo',
+      theme: ThemeData(fontFamily: 'Inter'),
       home: const HomePage(),
     );
   }
