@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo/core/app/ap_colors.dart';
+import 'package:todo/core/utils/formatter.dart';
 import 'package:todo/core/utils/mock.dart';
 import 'package:todo/core/utils/screen.dart';
 import 'package:todo/core/utils/spacer.dart';
@@ -21,6 +22,12 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        backgroundColor: APColors.dodgerBlue,
+        elevation: 0,
+        child: const Icon(Icons.add),
+      ),
       body: SafeArea(
         child: Padding(
           padding:
@@ -30,9 +37,14 @@ class HomeView extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  const Text(
-                    "March 9, 2020",
-                    style: TextStyle(
+                   Text(
+                    Formatter.instance
+                        .dateFormatUtil(
+                      dateTime: DateTime.now(),
+                      typeFormat:
+                      TypeFormat.mainDate,
+                    ),
+                    style: const TextStyle(
                         color: APColors.licorice,
                         fontSize: 32,
                         fontWeight: FontWeight.w700),
@@ -105,12 +117,13 @@ class HomeView extends StatelessWidget {
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
                           itemBuilder: (context, pos) {
-                            return ItemCompleteTask(title: Mock.incompleteTasks[pos].title);
+                            return ItemCompleteTask(
+                                title: Mock.completeTasks[pos].title);
                           },
                           separatorBuilder: (context, pos) {
                             return const VSpacer(16);
                           },
-                          itemCount: Mock.incompleteTasks.length)
+                          itemCount: Mock.completeTasks.length)
                     ],
                   ),
                 ),
