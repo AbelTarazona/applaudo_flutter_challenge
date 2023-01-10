@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:todo/presentation/pages/add_task_page.dart';
 import 'package:todo/presentation/pages/home_page.dart';
 
 enum Routes {
@@ -35,7 +36,7 @@ class AppNavigator {
       case _Paths.init:
         return pageRoute(page: const HomePage());
       case _Paths.addTask:
-        return pageRoute(page: HomePage());
+        return pageRoute(page: AddTaskPage());
       default:
         return pageRoute(page: const HomePage());
     }

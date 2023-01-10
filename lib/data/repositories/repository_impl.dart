@@ -20,4 +20,14 @@ class RepositoryImpl extends Repository {
       return Left(GeneralFailure(e.msg));
     }
   }
+
+  @override
+  Future<Either<Failure, String>> addTask(String date, String title) async {
+    try {
+      final data = await remoteDataSource.addTask(date, title);
+      return Right(data);
+    } on GeneralException catch (e) {
+      return Left(GeneralFailure(e.msg));
+    }
+  }
 }

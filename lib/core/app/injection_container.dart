@@ -7,6 +7,7 @@ import 'package:todo/data/datasources/datasource.dart';
 import 'package:todo/data/datasources/datasource_impl.dart';
 import 'package:todo/data/repositories/repository.dart';
 import 'package:todo/data/repositories/repository_impl.dart';
+import 'package:todo/domain/usecases/add_task.dart';
 import 'package:todo/domain/usecases/get_tasks.dart';
 import 'package:todo/presentation/bloc/task_bloc/task_bloc.dart';
 
@@ -16,12 +17,13 @@ init() async {
   //=======================
   // Blocs
   //=======================
-  sl.registerFactory(() => TaskBloc(getTasksUseCase: sl()));
+  sl.registerFactory(() => TaskBloc(getTasksUseCase: sl(), addTaskUseCase: sl()));
 
   //=======================
   // Use cases
   //=======================
   sl.registerLazySingleton(() => GetTasksUseCase(repository: sl()));
+  sl.registerLazySingleton(() => AddTaskUseCase(repository: sl()));
 
   //=======================
   // Repositories
