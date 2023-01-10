@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo/core/app/ap_colors.dart';
+import 'package:todo/core/app/navigator.dart';
 import 'package:todo/core/utils/formatter.dart';
 import 'package:todo/core/utils/mock.dart';
 import 'package:todo/core/utils/screen.dart';
 import 'package:todo/core/utils/spacer.dart';
 import 'package:todo/domain/entities/task_todo.dart';
 import 'package:todo/presentation/bloc/task_bloc/task_bloc.dart';
+import 'package:todo/presentation/empty_list.dart';
 import 'package:todo/presentation/widgets/item_complete_task.dart';
 import 'package:todo/presentation/widgets/item_incomplete_task.dart';
 
@@ -32,7 +34,9 @@ class _HomePageState extends State<HomePage> {
         List<TaskToDo> completeList = state.completedTasks;
         return Scaffold(
           floatingActionButton: FloatingActionButton(
-            onPressed: () {},
+            onPressed: () {
+              AppNavigator.push(Routes.ADD_TASK);
+            },
             backgroundColor: APColors.dodgerBlue,
             elevation: 0,
             child: const Icon(Icons.add),
@@ -98,13 +102,14 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                           const VSpacer(16),
+                          if (pendingList.isEmpty)
+                            const EmptyList(title: 'Add new tasks'),
                           ListView.separated(
                               shrinkWrap: true,
                               physics: const NeverScrollableScrollPhysics(),
                               itemBuilder: (context, pos) {
                                 return ItemIncompleteTask(
-                                  title: pendingList[pos].title,
-                                  category: 'Category',
+                                  task: pendingList[pos],
                                 );
                               },
                               separatorBuilder: (context, pos) {
@@ -120,12 +125,15 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                           const VSpacer(16),
+                          if (completeList.isEmpty)
+                            const EmptyList(
+                                title: 'All your tasks are complete'),
                           ListView.separated(
                               shrinkWrap: true,
                               physics: const NeverScrollableScrollPhysics(),
                               itemBuilder: (context, pos) {
                                 return ItemCompleteTask(
-                                    title: completeList[pos].title);
+                                    task: completeList[pos]);
                               },
                               separatorBuilder: (context, pos) {
                                 return const VSpacer(16);

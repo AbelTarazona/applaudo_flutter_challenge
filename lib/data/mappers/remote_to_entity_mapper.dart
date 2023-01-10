@@ -5,5 +5,5 @@ extension TaskX on DocumentModel {
   TaskToDo toEntity() => TaskToDo(
       title: fields.name.stringValue,
       date: fields.date.integerValue,
-      isDone: fields.isCompleted.booleanValue);
+      isComplete: fields.isCompleted.booleanValue);
 }
