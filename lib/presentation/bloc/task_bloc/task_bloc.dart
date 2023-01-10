@@ -56,7 +56,7 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
   }
 
   FutureOr<void> _onAddTask(AddTask event, Emitter<TaskState> emit) async {
-    await addTaskUseCase(
+    addTaskUseCase(
         AddTaskParams(title: event.task.title, date: event.task.date));
 
     emit(TaskState(
