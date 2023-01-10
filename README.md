@@ -1,16 +1,18 @@
-# todo
+# Applaudo Challenge
 
-Applaudo Challenge
+Demo:
+
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=oldNl7-km7M
+" target="_blank"><img src="http://img.youtube.com/vi/oldNl7-km7M/0.jpg" 
+alt="IMAGE ALT TEXT HERE" width="240" height="180" border="10" /></a>
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+For testing purposes you must first generate a token from the postman provided to me. Then, assign the value to bearerToken in the folder "lib/core/utils/constants.dart".
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Some observations
+- For personal and work reasons, I have not been able to complete the application, however, it contains the main parts of a scalable app.
+- More documentation on APIs was missing. For example: 
+  - There was no API for refreshing the token.
+  - There was a lack of definition on how to use filters in the data fetching APIs.
+  - The structure of the responses could have been more concise, without a lot of nesting.
