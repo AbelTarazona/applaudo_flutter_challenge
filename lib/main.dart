@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:todo/bootstrap.dart';
 import 'package:todo/core/app/ap_colors.dart';
+import 'package:todo/core/app/flavor.dart';
+import 'package:todo/core/app/navigator.dart';
 import 'package:todo/core/utils/border.dart';
-import 'package:todo/presentation/pages/home_page.dart';
 
 void main() {
-  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-    statusBarColor: APColors.smoke,
-    statusBarBrightness: Brightness.dark,
-    statusBarIconBrightness: Brightness.dark,
-  ));
-  runApp(const MyApp());
+  Flavor.instance.setFlavor = FlavorType.DEV;
+  bootstrap(() => const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -34,7 +31,8 @@ class MyApp extends StatelessWidget {
                 MaterialStateProperty.resolveWith((_) => Colors.transparent),
             side: AlwaysActiveBorderSide(),
           )),
-      home: const HomePage(),
+      navigatorKey: AppNavigator.navigatorKey,
+      onGenerateRoute: AppNavigator.onGenerateRoute,
     );
   }
 }
