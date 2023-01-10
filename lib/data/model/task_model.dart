@@ -1,67 +1,60 @@
-
 //TODO: For testing purpose I just use one file for all classes.
+
+import 'dart:convert';
+
+TaskModel taskModelFromJson(String str) => TaskModel.fromJson(json.decode(str));
+
+String taskModelToJson(TaskModel data) => json.encode(data.toJson());
 
 class TaskModel {
   TaskModel({
-    this.documents,
+    required this.documents,
   });
 
-  List<DocumentModel?>? documents;
+  List<DocumentModel> documents;
 
   factory TaskModel.fromJson(Map<String, dynamic> json) => TaskModel(
-        documents: json["documents"] == null
-            ? []
-            : List<DocumentModel?>.from(
-                json["documents"]!.map((x) => DocumentModel.fromJson(x))),
+        documents: List<DocumentModel>.from(
+            json["documents"].map((x) => DocumentModel.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
-        "documents": documents == null
-            ? []
-            : List<dynamic>.from(documents!.map((x) => x!.toJson())),
+        "documents": List<dynamic>.from(documents.map((x) => x.toJson())),
       };
 }
 
 class DocumentModel {
   DocumentModel({
-    this.name,
-    this.fields,
-    this.createTime,
-    this.updateTime,
+    required this.name,
+    required this.fields,
   });
 
-  String? name;
-  FieldsModel? fields;
-  DateTime? createTime;
-  DateTime? updateTime;
+  String name;
+  FieldsModel fields;
 
   factory DocumentModel.fromJson(Map<String, dynamic> json) => DocumentModel(
         name: json["name"],
         fields: FieldsModel.fromJson(json["fields"]),
-        createTime: DateTime.parse(json["createTime"]),
-        updateTime: DateTime.parse(json["updateTime"]),
       );
 
   Map<String, dynamic> toJson() => {
         "name": name,
-        "fields": fields!.toJson(),
-        "createTime": createTime?.toIso8601String(),
-        "updateTime": updateTime?.toIso8601String(),
+        "fields": fields.toJson(),
       };
 }
 
 class FieldsModel {
   FieldsModel({
-    this.categoryId,
-    this.date,
-    this.isCompleted,
-    this.name,
+    required this.categoryId,
+    required this.date,
+    required this.isCompleted,
+    required this.name,
   });
 
-  CategoryIdModel? categoryId;
-  DateModel? date;
-  IsCompletedModel? isCompleted;
-  CategoryIdModel? name;
+  CategoryIdModel categoryId;
+  DateModel date;
+  IsCompletedModel isCompleted;
+  CategoryIdModel name;
 
   factory FieldsModel.fromJson(Map<String, dynamic> json) => FieldsModel(
         categoryId: CategoryIdModel.fromJson(json["categoryId"]),
@@ -71,22 +64,21 @@ class FieldsModel {
       );
 
   Map<String, dynamic> toJson() => {
-        "categoryId": categoryId!.toJson(),
-        "date": date!.toJson(),
-        "isCompleted": isCompleted!.toJson(),
-        "name": name!.toJson(),
+        "categoryId": categoryId.toJson(),
+        "date": date.toJson(),
+        "isCompleted": isCompleted.toJson(),
+        "name": name.toJson(),
       };
 }
 
 class CategoryIdModel {
   CategoryIdModel({
-    this.stringValue,
+    required this.stringValue,
   });
 
-  String? stringValue;
+  String stringValue;
 
-  factory CategoryIdModel.fromJson(Map<String, dynamic> json) =>
-      CategoryIdModel(
+  factory CategoryIdModel.fromJson(Map<String, dynamic> json) => CategoryIdModel(
         stringValue: json["stringValue"],
       );
 
@@ -97,10 +89,10 @@ class CategoryIdModel {
 
 class DateModel {
   DateModel({
-    this.integerValue,
+    required this.integerValue,
   });
 
-  String? integerValue;
+  String integerValue;
 
   factory DateModel.fromJson(Map<String, dynamic> json) => DateModel(
         integerValue: json["integerValue"],
@@ -113,13 +105,12 @@ class DateModel {
 
 class IsCompletedModel {
   IsCompletedModel({
-    this.booleanValue,
+    required this.booleanValue,
   });
 
-  bool? booleanValue;
+  bool booleanValue;
 
-  factory IsCompletedModel.fromJson(Map<String, dynamic> json) =>
-      IsCompletedModel(
+  factory IsCompletedModel.fromJson(Map<String, dynamic> json) => IsCompletedModel(
         booleanValue: json["booleanValue"],
       );
 
