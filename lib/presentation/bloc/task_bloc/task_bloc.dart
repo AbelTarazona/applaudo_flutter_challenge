@@ -17,6 +17,7 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
   TaskBloc({required this.getTasksUseCase}) : super(const TaskState()) {
     on<GetTasks>(_onGetTasks);
     on<UpdateTask>(_onUpdateTask);
+    on<AddTask>(_onAddTask);
   }
 
   FutureOr<void> _onGetTasks(GetTasks event, Emitter<TaskState> emit) async {
@@ -49,5 +50,12 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
     }
 
     emit(TaskState(pendingTasks: pendingList, completedTasks: completeList));
+  }
+
+  FutureOr<void> _onAddTask(AddTask event, Emitter<TaskState> emit) {
+    emit(TaskState(
+      pendingTasks: List.from(state.pendingTasks)..add(event.task),
+      completedTasks: state.completedTasks
+    ));
   }
 }

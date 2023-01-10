@@ -85,7 +85,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   const VSpacer(16),
                   Divider(
-                    color: Colors.black.withOpacity(0.3),
+                    color: Colors.black.withOpacity(0.03),
                   ),
                   const VSpacer(16),
                   Expanded(
@@ -103,7 +103,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                           const VSpacer(16),
                           if (pendingList.isEmpty)
-                            const EmptyList(title: 'Add new tasks'),
+                            const EmptyList(title: 'Empty incomplete list'),
                           ListView.separated(
                               shrinkWrap: true,
                               physics: const NeverScrollableScrollPhysics(),
@@ -127,7 +127,7 @@ class _HomePageState extends State<HomePage> {
                           const VSpacer(16),
                           if (completeList.isEmpty)
                             const EmptyList(
-                                title: 'All your tasks are complete'),
+                                title: 'Empty complete list'),
                           ListView.separated(
                               shrinkWrap: true,
                               physics: const NeverScrollableScrollPhysics(),
