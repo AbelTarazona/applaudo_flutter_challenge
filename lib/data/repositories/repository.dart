@@ -4,4 +4,5 @@ import 'package:todo/domain/entities/task_todo.dart';
 
 abstract class Repository {
   Future<Either<Failure, List<TaskToDo>>> getTasks();
+  Future<Either<Failure, String>> addTask(String date, String title);
 }

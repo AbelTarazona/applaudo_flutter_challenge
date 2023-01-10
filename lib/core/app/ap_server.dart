@@ -9,6 +9,6 @@ class APServer {
   static String login() =>
       '$_apiIdentity:signInWithPassword?key=${AppConstant.firebaseToken}';
 
-  static String getTasks() =>
+  static String tasks() =>
       '${_apiFirebase}tasks?key=${AppConstant.firebaseToken}';
 }

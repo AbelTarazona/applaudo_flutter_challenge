@@ -84,7 +84,7 @@ class AddTaskPage extends StatelessWidget {
                 onPressed: () {
                   context.read<TaskBloc>().add(AddTask(
                       task: TaskToDo(
-                          title: titleController.text, date: '', isComplete: false)));
+                          title: titleController.text, date: DateTime.now().millisecondsSinceEpoch.toString(), isComplete: false)));
                   AppNavigator.pop();
                 },
                 style: ButtonStyle(

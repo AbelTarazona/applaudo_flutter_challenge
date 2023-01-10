@@ -6,6 +6,7 @@ import 'package:equatable/equatable.dart';
 import 'package:todo/core/app/failure.dart';
 import 'package:todo/core/app/use_cases.dart';
 import 'package:todo/domain/entities/task_todo.dart';
+import 'package:todo/domain/usecases/add_task.dart';
 import 'package:todo/domain/usecases/get_tasks.dart';
 
 part 'task_event.dart';
@@ -13,8 +14,10 @@ part 'task_state.dart';
 
 class TaskBloc extends Bloc<TaskEvent, TaskState> {
   final GetTasksUseCase getTasksUseCase;
+  final AddTaskUseCase addTaskUseCase;
 
-  TaskBloc({required this.getTasksUseCase}) : super(const TaskState()) {
+  TaskBloc({required this.getTasksUseCase, required this.addTaskUseCase})
+      : super(const TaskState()) {
     on<GetTasks>(_onGetTasks);
     on<UpdateTask>(_onUpdateTask);
     on<AddTask>(_onAddTask);
@@ -52,10 +55,12 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
     emit(TaskState(pendingTasks: pendingList, completedTasks: completeList));
   }
 
-  FutureOr<void> _onAddTask(AddTask event, Emitter<TaskState> emit) {
+  FutureOr<void> _onAddTask(AddTask event, Emitter<TaskState> emit) async {
+    await addTaskUseCase(
+        AddTaskParams(title: event.task.title, date: event.task.date));
+
     emit(TaskState(
-      pendingTasks: List.from(state.pendingTasks)..add(event.task),
-      completedTasks: state.completedTasks
-    ));
+        pendingTasks: List.from(state.pendingTasks)..add(event.task),
+        completedTasks: state.completedTasks));
   }
 }
