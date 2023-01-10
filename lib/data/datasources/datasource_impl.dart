@@ -17,8 +17,7 @@ class DataSourceImpl extends DataSource {
             APServer.getTasks(GlobalStore.instance.apiToken),
       );*/
       final response = await api.get(
-        urlSpecific:
-            APServer.getTasks('AIzaSyAFZ2uyHiPuQQi_4wf8cUQpdMEMqGapq_Q'),
+        urlSpecific: APServer.getTasks(),
       );
       if (response.isSuccess) {
         final body = response.result;
